@@ -36,4 +36,4 @@ clean:
 -include $(DEPFILES)
 
 # add .PHONY so that the non-targetfile - rules work even if a file with the same name exists.
-.PHONY: all run clean
+.PHONY: all run open clean

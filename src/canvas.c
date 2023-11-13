@@ -35,10 +35,22 @@ Canvas *create_canvas(int width, int height)
     return canvas;
 }
 
-void put_pixel(Canvas *canvas, int x, int y, Color color)
+void put_pixel_screen(Canvas *canvas, int x, int y, Color color)
 {
-    int place = canvas->width * x + y;
+    if (x < 0 || y < 0 || x > canvas->width - 1 || y > canvas->height - 1)
+    {
+        return;
+    }
+
+    int place = canvas->width * y + x;
     canvas->pixels[place] = color;
+}
+
+void put_pixel_canvas(Canvas *canvas, int x, int y, Color color)
+{
+    int screen_x = canvas->width / 2 + x;
+    int screen_y = canvas->height / 2 - y;
+    put_pixel_screen(canvas, screen_x, screen_y, color);
 }
 
 int export_canvas_to_ppm(Canvas *canvas, char *file_name)
